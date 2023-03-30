@@ -9,11 +9,12 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function ToDoList() {
   const [todoInput, setTodoInput] = useState({
     description: "",
-    date: "",
+    date: dayjs(),
     priority: "",
   });
   const [todoList, setTodoList] = useState([]);
@@ -30,6 +31,7 @@ function ToDoList() {
       sortable: true,
       filter: true,
       floatingFilter: true,
+      valueFormatter: (params) => dayjs(params.value).format("DD.MM.YYYY"),
     },
     {
       field: "priority",
@@ -68,7 +70,7 @@ function ToDoList() {
     setTodoList([...todoList, todoInput]);
     setTodoInput({
       description: "",
-      date: "",
+      date: dayjs(),
       priority: "",
     });
   };
@@ -113,10 +115,16 @@ function ToDoList() {
           name="priority"
           value={todoInput.priority}
         />
-        <Button variant="contained" onClick={addTodo}>
+        <Button size="large" variant="outlined" onClick={addTodo}>
           Add
         </Button>
-        <Button variant="contained" color="error" onClick={deleteTodo}>
+        <Button
+          variant="outlined"
+          size="large"
+          endIcon={<DeleteIcon />}
+          color="error"
+          onClick={deleteTodo}
+        >
           Delete
         </Button>
       </Stack>
