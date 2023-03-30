@@ -1,10 +1,10 @@
 import "./App.css";
-import ToDoList from "./components/ToDoList";
+import TabMenu from "./components/TabMenu";
 
 function App() {
   return (
     <div className="App">
-      <ToDoList />
+      <TabMenu />
     </div>
   );
 }
